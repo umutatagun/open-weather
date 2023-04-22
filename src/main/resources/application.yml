@@ -10,5 +10,20 @@ spring:
 
 weather:
   api-url: http://api.weatherstack.com/current
-  api-key: ${API-KEY:default}
+  api-key: ${WEATHER_STACK_API_KEY:default}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
+          - prometheus
+
+resilience4j:
+  ratelimiter:
+    instances:
+      basic:
+        limit-for-period: 10
+        limit-reflesh-period: 1m    # Dakikada 10 tane istek atabilir.
+        limit-duration: 10s         #10 saniye bekledikten sonra tekrar istek atmaya devam edebilir

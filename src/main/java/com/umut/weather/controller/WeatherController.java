@@ -3,6 +3,7 @@ package com.umut.weather.controller;
 import com.umut.weather.controller.validation.CityNameConstraint;
 import com.umut.weather.dto.WeatherDto;
 import com.umut.weather.service.WeatherService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +20,7 @@ public class WeatherController {
     }
 
     @GetMapping("/{city}")
+    @RateLimiter(name = "basic") // Propertiesdeki isimle eşleşmeli
     public ResponseEntity<WeatherDto> getWeather(@PathVariable @CityNameConstraint @NotBlank String city) {
         return ResponseEntity.ok(weatherService.getWeatherByCityName(city));
     }

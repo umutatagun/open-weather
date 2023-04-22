@@ -22,4 +22,9 @@ public class Constant {
         Constant.API_KEY = apiKey;
     }
 
+    public static class ERROR_MESSAGES {
+        public static final String GENERIC = "Unknown Error!";
+        public static final String REQUEST_LIMIT_EXCEEDED = "Request Limit Exceeded!";
+    }
+
 }
